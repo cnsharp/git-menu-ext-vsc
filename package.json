@@ -1,7 +1,7 @@
 {
   "name": "git-menu-ext",
   "displayName": "Git Menu Ext",
-  "description": "Git branch management and file export utilities",
+  "description": "Git branch management, commit operations, and file export utilities",
   "version": "1.0.0",
   "publisher": "cnsharp",
   "author": {
@@ -45,6 +45,12 @@
         "title": "Export Changed Files...",
         "category": "Git",
         "icon": "$(file-zip)"
+      },
+      {
+        "command": "gitMenuExt.squashCommits",
+        "title": "Squash Commits...",
+        "category": "Git",
+        "icon": "$(fold)"
       }
     ],
     "menus": {
@@ -60,6 +66,10 @@
         {
           "command": "gitMenuExt.exportChangedFiles",
           "group": "gitMenuExt@3"
+        },
+        {
+          "command": "gitMenuExt.squashCommits",
+          "group": "gitMenuExt@4"
         }
       ]
     }

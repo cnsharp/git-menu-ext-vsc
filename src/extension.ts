@@ -3,6 +3,7 @@ import { copyBranchName } from './commands/copyBranchName';
 import { deleteBranches } from './commands/deleteBranches';
 import { deleteOutdatedBranches } from './commands/deleteOutdatedBranches';
 import { exportChangedFiles } from './commands/exportChangedFiles';
+import { squashCommits } from './commands/squashCommits';
 
 let statusBarItem: vscode.StatusBarItem;
 
@@ -12,6 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('gitMenuExt.deleteBranches', () => deleteBranches(context)),
         vscode.commands.registerCommand('gitMenuExt.deleteOutdatedBranches', () => deleteOutdatedBranches()),
         vscode.commands.registerCommand('gitMenuExt.exportChangedFiles', () => exportChangedFiles(context)),
+        vscode.commands.registerCommand('gitMenuExt.squashCommits', () => squashCommits()),
     );
 
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 99);

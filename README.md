@@ -1,6 +1,6 @@
 # Git Menu Ext
 
-VS Code extension that adds extra Git actions for branch management and file export.
+VS Code extension that adds extra Git actions for branch management, commit operations, and file export.
 
 ## Features
 
@@ -38,6 +38,18 @@ Lists and deletes local branches whose remote tracking branch is gone.
 3. Select branches to delete and confirm
    - Fully merged branches are deleted with `-d`
    - Unmerged branches are deleted with `-D`
+
+---
+
+### Squash Commits
+
+Squash multiple recent commits into one.
+
+**Location:** Command Palette → `Git: Squash Commits...`, or Source Control menu
+
+1. Select a target commit from recent history — it and all commits above it up to HEAD will be squashed
+2. Edit the commit message (pre-filled with deduplicated messages from all squashed commits)
+3. Confirm to squash
 
 ---
 
