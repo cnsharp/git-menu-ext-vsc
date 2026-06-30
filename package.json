@@ -3,7 +3,7 @@
   "displayName": "Git Menu Ext",
   "description": "Git branch management, commit operations, and file export utilities",
   "version": "1.0.0",
-  "publisher": "cnsharp",
+  "publisher": "CnSharpStudio",
   "author": {
     "name": "CnSharp Studio",
     "url": "https://github.com/cnsharp"
