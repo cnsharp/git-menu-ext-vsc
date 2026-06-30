@@ -6,6 +6,7 @@ import { deleteOutdatedBranches } from './commands/deleteOutdatedBranches';
 import { exportChangedFiles } from './commands/exportChangedFiles';
 import { squashCommits } from './commands/squashCommits';
 import { showFileHistory } from './commands/showFileHistory';
+import { compareWithBranch } from './commands/compareWithBranch';
 import { GitRevisionProvider } from './gitRevisionProvider';
 import { getGitAPI, GitRepository, runGit } from './git';
 
@@ -38,6 +39,10 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('gitMenuExt.showFileHistory', (uri?: vscode.Uri) => {
             const fileUri = uri || vscode.window.activeTextEditor?.document.uri;
             if (fileUri) { showFileHistory(fileUri); }
+        }),
+        vscode.commands.registerCommand('gitMenuExt.compareWithBranch', (uri?: vscode.Uri) => {
+            const fileUri = uri || vscode.window.activeTextEditor?.document.uri;
+            if (fileUri) { compareWithBranch(fileUri); }
         }),
     );
 

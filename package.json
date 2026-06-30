@@ -77,6 +77,12 @@
         "title": "Show File History",
         "category": "Git",
         "icon": "$(history)"
+      },
+      {
+        "command": "gitMenuExt.compareWithBranch",
+        "title": "Compare with Branch...",
+        "category": "Git",
+        "icon": "$(git-compare)"
       }
     ],
     "submenus": [
@@ -115,8 +121,12 @@
           "when": "gitMenuExt.hasChanges"
         },
         {
-          "command": "gitMenuExt.showFileHistory",
+          "command": "gitMenuExt.compareWithBranch",
           "group": "2_diff@2"
+        },
+        {
+          "command": "gitMenuExt.showFileHistory",
+          "group": "2_diff@3"
         }
       ],
       "scm/title": [
