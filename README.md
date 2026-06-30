@@ -75,6 +75,7 @@ Right-click in the editor to access the **Git** submenu with the following actio
 - **Unstage Changes** — unstage the current file (shown when file has staged changes)
 - **Discard Changes** — discard working tree changes for the current file
 - **Open Changes** — open the diff view for the current file
+- **Compare with Branch...** — compare the current file with its version on another branch
 - **Show File History** — view the commit history of the current file in a side panel, click any commit to see its diff against the previous version
 
 ## Requirements
