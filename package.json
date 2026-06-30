@@ -1,8 +1,8 @@
 {
   "name": "git-menu-ext",
   "displayName": "Git Menu Ext",
-  "description": "Git branch management, commit operations, and file export utilities",
-  "version": "1.0.0",
+  "description": "Git branch management, commit operations, file export, and editor context menu utilities",
+  "version": "1.1.0",
   "publisher": "CnSharpStudio",
   "author": {
     "name": "CnSharp Studio",
@@ -51,9 +51,74 @@
         "title": "Squash Commits...",
         "category": "Git",
         "icon": "$(fold)"
+      },
+      {
+        "command": "gitMenuExt.stageChanges",
+        "title": "Stage Changes",
+        "category": "Git"
+      },
+      {
+        "command": "gitMenuExt.unstageChanges",
+        "title": "Unstage Changes",
+        "category": "Git"
+      },
+      {
+        "command": "gitMenuExt.discardChanges",
+        "title": "Discard Changes",
+        "category": "Git"
+      },
+      {
+        "command": "gitMenuExt.openChanges",
+        "title": "Open Changes",
+        "category": "Git"
+      },
+      {
+        "command": "gitMenuExt.showFileHistory",
+        "title": "Show File History",
+        "category": "Git",
+        "icon": "$(history)"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "gitMenuExt.editorContext",
+        "label": "Git"
       }
     ],
     "menus": {
+      "editor/context": [
+        {
+          "submenu": "gitMenuExt.editorContext",
+          "group": "z_gitMenuExt",
+          "when": "resourceScheme == file && gitMenuExt.inRepo"
+        }
+      ],
+      "gitMenuExt.editorContext": [
+        {
+          "command": "gitMenuExt.stageChanges",
+          "group": "1_changes@1",
+          "when": "gitMenuExt.canStage"
+        },
+        {
+          "command": "gitMenuExt.unstageChanges",
+          "group": "1_changes@2",
+          "when": "gitMenuExt.canUnstage"
+        },
+        {
+          "command": "gitMenuExt.discardChanges",
+          "group": "1_changes@3",
+          "when": "gitMenuExt.canStage"
+        },
+        {
+          "command": "gitMenuExt.openChanges",
+          "group": "2_diff@1",
+          "when": "gitMenuExt.hasChanges"
+        },
+        {
+          "command": "gitMenuExt.showFileHistory",
+          "group": "2_diff@2"
+        }
+      ],
       "scm/title": [
         {
           "command": "gitMenuExt.deleteBranches",

@@ -1,6 +1,6 @@
 # Git Menu Ext
 
-VS Code extension that adds extra Git actions for branch management, commit operations, and file export.
+VS Code extension that adds extra Git actions for branch management, commit operations, file export, and editor context menu integration.
 
 ## Features
 
@@ -66,6 +66,16 @@ Exports all files changed between two commits.
    - **Output directory**: where to export
    - **Export as zip**: pack into a zip archive, or copy as a directory tree
 4. The output is named `{project}-{oldestHash}-{newestHash}.zip` (or directory)
+
+### Editor Context Menu
+
+Right-click in the editor to access the **Git** submenu with the following actions:
+
+- **Stage Changes** — stage the current file (shown when file has unstaged modifications)
+- **Unstage Changes** — unstage the current file (shown when file has staged changes)
+- **Discard Changes** — discard working tree changes for the current file
+- **Open Changes** — open the diff view for the current file
+- **Show File History** — view the commit history of the current file in a side panel, click any commit to see its diff against the previous version
 
 ## Requirements
 

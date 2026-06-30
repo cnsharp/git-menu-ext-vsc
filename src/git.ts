@@ -13,15 +13,33 @@ export function runGit(args: string[], cwd: string): Promise<GitResult> {
     });
 }
 
+export interface GitChange {
+    uri: vscode.Uri;
+}
+
+export interface GitRepository {
+    rootUri: vscode.Uri;
+    state: {
+        HEAD?: { name?: string };
+        indexChanges: GitChange[];
+        workingTreeChanges: GitChange[];
+        onDidChange: vscode.Event<void>;
+    };
+}
+
 interface GitExtensionAPI {
     getAPI(version: 1): {
-        repositories: Array<{
-            rootUri: vscode.Uri;
-            state: {
-                HEAD?: { name?: string };
-            };
-        }>;
+        repositories: GitRepository[];
+        onDidOpenRepository: vscode.Event<GitRepository>;
     };
+}
+
+export function getGitAPI() {
+    const gitExtension = vscode.extensions.getExtension<GitExtensionAPI>('vscode.git');
+    if (!gitExtension?.isActive) {
+        return undefined;
+    }
+    return gitExtension.exports.getAPI(1);
 }
 
 export function getRepositoryRoot(): string | undefined {
