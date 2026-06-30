@@ -11,6 +11,11 @@ export async function deleteOutdatedBranches(): Promise<void> {
 
     const currentBranch = getCurrentBranchName();
 
+    await vscode.window.withProgress(
+        { location: vscode.ProgressLocation.Notification, title: 'Fetching remote status...' },
+        () => runGit(['fetch', '--prune'], repoRoot)
+    );
+
     const vvResult = await runGit(['branch', '-vv'], repoRoot);
     const goneBranches: string[] = vvResult.stdout
         .split('\n')
