@@ -1,0 +1,82 @@
+{
+  "name": "git-menu-ext",
+  "displayName": "Git Menu Ext",
+  "description": "Git branch management and file export utilities",
+  "version": "1.0.0",
+  "publisher": "cnsharp",
+  "author": {
+    "name": "CnSharp Studio",
+    "url": "https://github.com/cnsharp"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cnsharp/git-menu-ext-vsc"
+  },
+  "homepage": "https://github.com/cnsharp/git-menu-ext-vsc#readme",
+  "bugs": {
+    "url": "https://github.com/cnsharp/git-menu-ext-vsc/issues"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "icon": "resources/icon.png",
+  "categories": ["SCM Providers"],
+  "keywords": ["git", "branch", "export", "delete"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "extensionDependencies": ["vscode.git"],
+  "contributes": {
+    "commands": [
+      {
+        "command": "gitMenuExt.deleteBranches",
+        "title": "Delete Branches...",
+        "category": "Git",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "gitMenuExt.deleteOutdatedBranches",
+        "title": "Delete Outdated Branches...",
+        "category": "Git",
+        "icon": "$(warning)"
+      },
+      {
+        "command": "gitMenuExt.exportChangedFiles",
+        "title": "Export Changed Files...",
+        "category": "Git",
+        "icon": "$(file-zip)"
+      }
+    ],
+    "menus": {
+      "scm/title": [
+        {
+          "command": "gitMenuExt.deleteBranches",
+          "group": "gitMenuExt@1"
+        },
+        {
+          "command": "gitMenuExt.deleteOutdatedBranches",
+          "group": "gitMenuExt@2"
+        },
+        {
+          "command": "gitMenuExt.exportChangedFiles",
+          "group": "gitMenuExt@3"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "yazl": "^2.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@types/yazl": "^2.4.5",
+    "@vscode/vsce": "^3.2.0",
+    "typescript": "^5.3.0"
+  }
+}
