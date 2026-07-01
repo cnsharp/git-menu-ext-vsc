@@ -11,12 +11,17 @@ interface FileCommit {
 
 export async function showFileHistory(fileUri: vscode.Uri): Promise<void> {
     const repoRoot = getRepositoryRoot();
-    if (!repoRoot) {
-        vscode.window.showWarningMessage('No Git repository found.');
+    if (!repoRoot || !fileUri.fsPath.startsWith(repoRoot)) {
+        vscode.window.showWarningMessage('This file is not in a Git repository.');
         return;
     }
 
     const relativePath = path.relative(repoRoot, fileUri.fsPath).replace(/\\/g, '/');
+    const ignoreResult = await runGit(['check-ignore', '-q', relativePath], repoRoot);
+    if (ignoreResult.exitCode === 0) {
+        vscode.window.showWarningMessage('This file is ignored by Git.');
+        return;
+    }
     const fileName = path.basename(fileUri.fsPath);
 
     const logResult = await runGit(

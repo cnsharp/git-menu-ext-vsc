@@ -89,6 +89,10 @@
       {
         "id": "gitMenuExt.editorContext",
         "label": "Git"
+      },
+      {
+        "id": "gitMenuExt.explorerContext",
+        "label": "Git"
       }
     ],
     "menus": {
@@ -97,6 +101,23 @@
           "submenu": "gitMenuExt.editorContext",
           "group": "z_gitMenuExt",
           "when": "resourceScheme == file && gitMenuExt.inRepo"
+        }
+      ],
+      "explorer/context": [
+        {
+          "submenu": "gitMenuExt.explorerContext",
+          "group": "z_gitMenuExt",
+          "when": "resourceScheme == file"
+        }
+      ],
+      "gitMenuExt.explorerContext": [
+        {
+          "command": "gitMenuExt.compareWithBranch",
+          "group": "1_diff@1"
+        },
+        {
+          "command": "gitMenuExt.showFileHistory",
+          "group": "1_diff@2"
         }
       ],
       "gitMenuExt.editorContext": [

@@ -4,8 +4,15 @@ import { runGit, getRepositoryRoot, getCurrentBranchName } from '../git';
 
 export async function compareWithBranch(fileUri: vscode.Uri): Promise<void> {
     const repoRoot = getRepositoryRoot();
-    if (!repoRoot) {
-        vscode.window.showWarningMessage('No Git repository found.');
+    if (!repoRoot || !fileUri.fsPath.startsWith(repoRoot)) {
+        vscode.window.showWarningMessage('This file is not in a Git repository.');
+        return;
+    }
+
+    const relativePath = path.relative(repoRoot, fileUri.fsPath).replace(/\\/g, '/');
+    const ignoreResult = await runGit(['check-ignore', '-q', relativePath], repoRoot);
+    if (ignoreResult.exitCode === 0) {
+        vscode.window.showWarningMessage('This file is ignored by Git.');
         return;
     }
 
@@ -37,7 +44,6 @@ export async function compareWithBranch(fileUri: vscode.Uri): Promise<void> {
     });
     if (!picked) { return; }
 
-    const relativePath = path.relative(repoRoot, fileUri.fsPath).replace(/\\/g, '/');
     const fileName = path.basename(fileUri.fsPath);
 
     const branchUri = vscode.Uri.parse(`gitshow:/${picked.label}/${relativePath}`);

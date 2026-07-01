@@ -78,6 +78,15 @@ Right-click in the editor to access the **Git** submenu with the following actio
 - **Compare with Branch...** — compare the current file with its version on another branch
 - **Show File History** — view the commit history of the current file in a side panel, click any commit to see its diff against the previous version
 
+### Explorer Context Menu
+
+Right-click a file in the Explorer to access the **Git** submenu with:
+
+- **Compare with Branch...** — compare the file with its version on another branch
+- **Show File History** — view the commit history of the file
+
+Non-Git or gitignored files are validated at command execution time.
+
 ## Requirements
 
 - VS Code 1.85+
