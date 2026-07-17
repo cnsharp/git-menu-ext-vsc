@@ -53,6 +53,12 @@
         "icon": "$(fold)"
       },
       {
+        "command": "gitMenuExt.editCommitMessage",
+        "title": "Edit Commit Message...",
+        "category": "Git",
+        "icon": "$(edit)"
+      },
+      {
         "command": "gitMenuExt.stageChanges",
         "title": "Stage Changes",
         "category": "Git"
@@ -166,6 +172,10 @@
         {
           "command": "gitMenuExt.squashCommits",
           "group": "gitMenuExt@4"
+        },
+        {
+          "command": "gitMenuExt.editCommitMessage",
+          "group": "gitMenuExt@5"
         }
       ]
     }

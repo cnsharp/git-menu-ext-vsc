@@ -2,14 +2,23 @@ import { execFile } from 'child_process';
 import * as vscode from 'vscode';
 import { GitResult } from './types';
 
-export function runGit(args: string[], cwd: string): Promise<GitResult> {
+export function runGit(args: string[], cwd: string, env?: NodeJS.ProcessEnv): Promise<GitResult> {
     return new Promise((resolve) => {
-        execFile('git', args, { cwd, maxBuffer: 10 * 1024 * 1024 }, (error, stdout, stderr) => {
-            resolve({
-                stdout: (stdout || '').trim(),
-                exitCode: error ? (error as any).code ?? 1 : 0,
-            });
-        });
+        execFile(
+            'git',
+            args,
+            {
+                cwd,
+                maxBuffer: 10 * 1024 * 1024,
+                env: env ? { ...process.env, ...env } : undefined,
+            },
+            (error, stdout, stderr) => {
+                resolve({
+                    stdout: (stdout || '').trim(),
+                    exitCode: error ? (error as any).code ?? 1 : 0,
+                });
+            }
+        );
     });
 }
 

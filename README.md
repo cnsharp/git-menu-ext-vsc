@@ -55,6 +55,23 @@ Squash multiple recent commits into one.
 
 ---
 
+### Edit Commit Message
+
+Rewrite the message of an **unpushed** commit.
+
+**Location:** Command Palette → `Git: Edit Commit Message...`, or Source Control menu
+
+1. Pick a commit from the list — only **unpushed** commits are shown (commits already contained in a remote branch never appear, so pushed history can't be rewritten)
+2. Edit the message; save to confirm, close the tab to cancel
+3. The message is updated in place
+
+> Notes:
+> - The working tree must be clean (commit or stash changes first).
+> - Merge commits are not editable, and a commit can't be edited if a merge commit exists after it.
+> - For non-HEAD commits, the original author name/email/date are preserved and later commits are kept intact (rewrite via `commit-tree` + `rebase --onto`).
+
+---
+
 ### Export Changed Files
 
 Exports all files changed between two commits.

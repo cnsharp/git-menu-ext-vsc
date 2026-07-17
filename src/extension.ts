@@ -3,6 +3,7 @@ import * as path from 'path';
 import { copyBranchName } from './commands/copyBranchName';
 import { deleteBranches } from './commands/deleteBranches';
 import { deleteOutdatedBranches } from './commands/deleteOutdatedBranches';
+import { editCommitMessage } from './commands/editCommitMessage';
 import { exportChangedFiles } from './commands/exportChangedFiles';
 import { squashCommits } from './commands/squashCommits';
 import { showFileHistory } from './commands/showFileHistory';
@@ -24,6 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('gitMenuExt.deleteOutdatedBranches', () => deleteOutdatedBranches()),
         vscode.commands.registerCommand('gitMenuExt.exportChangedFiles', () => exportChangedFiles(context)),
         vscode.commands.registerCommand('gitMenuExt.squashCommits', () => squashCommits()),
+        vscode.commands.registerCommand('gitMenuExt.editCommitMessage', () => editCommitMessage()),
         vscode.commands.registerCommand('gitMenuExt.stageChanges', () => {
             vscode.commands.executeCommand('git.stage');
         }),
