@@ -68,18 +68,48 @@ export async function squashCommits(): Promise<void> {
         return;
     }
 
-    const resetResult = await runGit(['reset', '--soft', `${pick.label}~1`], repoRoot);
-    if (resetResult.exitCode !== 0) {
-        vscode.window.showErrorMessage(`Failed to reset: ${resetResult.stdout}`);
-        cleanUp(tmpFile);
-        return;
-    }
+    // Determine whether the target commit is a root commit (no parent).
+    // If it is a root, `reset --soft <hash>~1` would fail with "unknown revision" because a root has no ancestor.
+    // Instead, use commit-tree to create a new parentless commit that merges everything from HEAD down to the root.
+    const parentResult = await runGit(['rev-parse', `${pick.label}^`], repoRoot);
+    const isRootTarget = parentResult.exitCode !== 0;
 
-    const commitResult = await runGit(['commit', '-m', message], repoRoot);
-    if (commitResult.exitCode !== 0) {
-        vscode.window.showErrorMessage(`Failed to commit: ${commitResult.stdout}`);
-        cleanUp(tmpFile);
-        return;
+    if (isRootTarget) {
+        const treeResult = await runGit(['rev-parse', 'HEAD^{tree}'], repoRoot);
+        if (treeResult.exitCode !== 0) {
+            vscode.window.showErrorMessage(`Failed to read tree: ${treeResult.stdout}`);
+            cleanUp(tmpFile);
+            return;
+        }
+        const newCommitResult = await runGit(
+            ['commit-tree', '-m', message, treeResult.stdout.trim()],
+            repoRoot
+        );
+        if (newCommitResult.exitCode !== 0) {
+            vscode.window.showErrorMessage(`Failed to create commit: ${newCommitResult.stdout}`);
+            cleanUp(tmpFile);
+            return;
+        }
+        const resetResult = await runGit(['reset', '--soft', newCommitResult.stdout.trim()], repoRoot);
+        if (resetResult.exitCode !== 0) {
+            vscode.window.showErrorMessage(`Failed to reset: ${resetResult.stdout}`);
+            cleanUp(tmpFile);
+            return;
+        }
+    } else {
+        const resetResult = await runGit(['reset', '--soft', `${pick.label}~1`], repoRoot);
+        if (resetResult.exitCode !== 0) {
+            vscode.window.showErrorMessage(`Failed to reset: ${resetResult.stdout}`);
+            cleanUp(tmpFile);
+            return;
+        }
+
+        const commitResult = await runGit(['commit', '-m', message], repoRoot);
+        if (commitResult.exitCode !== 0) {
+            vscode.window.showErrorMessage(`Failed to commit: ${commitResult.stdout}`);
+            cleanUp(tmpFile);
+            return;
+        }
     }
 
     closeTab(tmpFile);

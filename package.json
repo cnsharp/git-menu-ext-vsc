@@ -2,7 +2,7 @@
   "name": "git-menu-ext",
   "displayName": "Git Menu Ext",
   "description": "Git branch management, commit operations, file export, and editor context menu utilities",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "CnSharpStudio",
   "author": {
     "name": "CnSharp Studio",

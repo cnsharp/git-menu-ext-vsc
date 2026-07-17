@@ -51,6 +51,8 @@ Squash multiple recent commits into one.
 2. Edit the commit message (pre-filled with deduplicated messages from all squashed commits)
 3. Confirm to squash
 
+> Note: squashing down to a **root commit** (a commit with no parent) is supported — the extension automatically creates a new parentless commit instead of failing on `reset --soft <root>~1`.
+
 ---
 
 ### Export Changed Files
