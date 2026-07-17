@@ -116,13 +116,14 @@ Non-Git or gitignored files are validated at command execution time.
 **From VSIX file:**
 
 ```bash
-code --install-extension git-menu-ext-1.0.0.vsix
+code --install-extension git-menu-ext-*.vsix
 ```
 
 Or in VS Code: Extensions → `...` → Install from VSIX...
 
 **From Marketplace:**
-Search 'Git Menu Ext' in VS Code [Extensions] view.
+- Search 'Git Menu Ext' in VS Code [Extensions] view.
+- [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=CnSharpStudio.git-menu-ext)
 
 ## Build
 
