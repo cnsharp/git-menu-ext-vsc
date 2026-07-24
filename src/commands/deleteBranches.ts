@@ -31,7 +31,7 @@ export async function deleteBranches(context: vscode.ExtensionContext): Promise<
 
     const currentBranch = getCurrentBranchName();
 
-    const localResult = await runGit(['branch', '--list', `*${keyword.trim()}*`], repoRoot);
+    const localResult = await runGit(['branch', '--ignore-case', '--list', `*${keyword.trim()}*`], repoRoot);
     const localBranches = localResult.stdout
         .split('\n')
         .map(b => b.replace(/^\*?\s+/, '').trim())
@@ -39,7 +39,7 @@ export async function deleteBranches(context: vscode.ExtensionContext): Promise<
 
     let remoteBranches: string[] = [];
     if (deleteRemote.value) {
-        const remoteResult = await runGit(['branch', '-r', '--list', `*${keyword.trim()}*`], repoRoot);
+        const remoteResult = await runGit(['branch', '-r', '--ignore-case', '--list', `*${keyword.trim()}*`], repoRoot);
         remoteBranches = remoteResult.stdout
             .split('\n')
             .map(b => b.trim())
